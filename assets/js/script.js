@@ -2,6 +2,8 @@
 var generatePasswordIDBtn = document.getElementById;
 var generatePasswordQBtn = document.querySelector("#generate");
 
+var password = ""
+
 //Character sets to choose for password
 //Numeric character set
 //Uppercase alphabet
@@ -25,64 +27,58 @@ var arrCharNumeric = strCharNumeric.split("");
 
 //MAIN PROCESS
 
-//user choices of length, special chars, UC, LC, numeric chars
-//Store user choices to variables
+password = generatePassword();
+console.log(password);
 
-var userChoiceLength = prompt("Enter password length: ");
+function generatePassword() {
 
-var userChoiceUpperChars = confirm("Upper case characters?");
-var userChoiceLowerChars = confirm("Lower case characters?");
-var userChoiceSpecialChars = confirm("Special characters?");
-var userChoiceNumericChars = confirm("Numeric characters?");
+  //user choices of length, special chars, UC, LC, numeric chars
+  //Store user choices to variables
 
-// console.log(userChoiceLength);
+  var userChoiceLength = prompt("Enter password length: ");
+  if (userChoiceLength < 8 || userChoiceLength > 128) {
+    return generatePassword();
+  }
 
-// console.log(userChoiceUpperChars);
-// console.log(userChoiceLowerChars);
-// console.log(userChoiceSpecialChars);
-// console.log(userChoiceNumericChars);
+  var userChoiceUpperChars = confirm("Upper case characters?");
+  var userChoiceLowerChars = confirm("Lower case characters?");
+  var userChoiceSpecialChars = confirm("Special characters?");
+  var userChoiceNumericChars = confirm("Numeric characters?");
 
-var userChoicePool = [] ;
+  // console.log(userChoiceLength);
 
-if (userChoiceUpperChars) {
-  userChoicePool = arrCharUpper;
+  // console.log(userChoiceUpperChars);
+  // console.log(userChoiceLowerChars);
+  // console.log(userChoiceSpecialChars);
+  // console.log(userChoiceNumericChars);
+
+
+  var userChoiceAllChars = [];
+  password = ""
+
+  if (userChoiceUpperChars) {
+    userChoiceAll = arrCharUpper;
+  }
+
+  if (userChoiceLowerChars) {
+    userChoiceAll = userChoiceAll.concat(arrCharLower);
+  }
+
+  if (userChoiceSpecialChars) {
+    userChoiceAll = userChoiceAll.concat(arrCharSpecial);
+  }
+
+  if (userChoiceNumericChars) {
+    userChoiceAll = userChoiceAll.concat(arrCharNumeric);
+  }
+
+  // console.log(userChoiceAll);
+
+  for (var i = 0; i < userChoiceLength; i++) {
+    var index = Math.floor(Math.random() * userChoiceAll.length);
+    // console.log(userChoiceAll)
+    password += userChoiceAll[index];
+  }
+
+  return (password);
 }
-
-if(userChoiceLowerChars){
-  userChoicePool = userChoicePool.concat(arrCharLower);
-}
-
-if(userChoiceSpecialChars){
-  userChoicePool = userChoicePool.concat(arrCharSpecial);
-}
-
-if(userChoiceNumericChars){
-  userChoicePool = userChoicePool.concat(arrCharNumeric);
-}
-
-console.log(userChoicePool);
-//create a pool of all characters
-/*
-
-
-useerCharsPool =[];
-
-
-
-function writePassword() {
-  var password = generatePassword();
-  var passwordTextEl = document.getElementById("password")
-
-  passwordTextEl.value = password
-
-  return;
-}
-
-if(userChoiceSpecialChars){
-  copyArrayPool(specialCharArr);
-}
-
-//don't use parenthesis when specifying function
-generatePasswordQBtn.addEventListener("click",writePassword);
-
-*/
