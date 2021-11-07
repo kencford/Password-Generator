@@ -1,6 +1,6 @@
 //Data
-var generatePasswordIDBtn = document.getElementById;
-var generatePasswordQBtn = document.querySelector("#generate");
+var generatePasswordIDBtn = document.getElementById("generate");
+// var generatePasswordQBtn = document.querySelector("#generate");
 
 var password = ""
 
@@ -27,8 +27,8 @@ var arrCharNumeric = strCharNumeric.split("");
 
 //MAIN PROCESS
 
-password = generatePassword();
-console.log(password);
+// password = generatePassword();
+// console.log(password);
 
 function generatePassword() {
 
@@ -57,28 +57,42 @@ function generatePassword() {
   password = ""
 
   if (userChoiceUpperChars) {
-    userChoiceAll = arrCharUpper;
+    userChoiceAllChars = arrCharUpper;
   }
 
   if (userChoiceLowerChars) {
-    userChoiceAll = userChoiceAll.concat(arrCharLower);
+    userChoiceAllChars = userChoiceAllChars.concat(arrCharLower);
   }
 
   if (userChoiceSpecialChars) {
-    userChoiceAll = userChoiceAll.concat(arrCharSpecial);
+    userChoiceAllChars = userChoiceAllChars.concat(arrCharSpecial);
   }
 
   if (userChoiceNumericChars) {
-    userChoiceAll = userChoiceAll.concat(arrCharNumeric);
+    userChoiceAllChars = userChoiceAllChars.concat(arrCharNumeric);
   }
 
   // console.log(userChoiceAll);
 
   for (var i = 0; i < userChoiceLength; i++) {
-    var index = Math.floor(Math.random() * userChoiceAll.length);
+    var index = Math.floor(Math.random() * userChoiceAllChars.length);
     // console.log(userChoiceAll)
-    password += userChoiceAll[index];
+    password += userChoiceAllChars[index];
   }
 
   return (password);
+}
+
+//This makes function_log_button_clicked *called" on the event of button getting clicked
+generatePasswordIDBtn.addEventListener("click", writePassword);
+
+function writePassword() {
+    var password = generatePassword();
+  
+    // getting reference to element in HTML identified with id="password"
+    var passwordTextElement = document.getElementById("password");
+    //giving that element the password value
+    //note for me ... notice importance of adding ".value"
+    passwordTextElement.value = password;
+  
 }
