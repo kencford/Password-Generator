@@ -2,6 +2,9 @@
 var generatePasswordIDBtn = document.getElementById("generate");
 // var generatePasswordQBtn = document.querySelector("#generate");
 
+// getting reference to element in HTML identified with id="password"
+var passwordTextElement = document.getElementById("password");
+
 var password = ""
 
 //Character sets to choose for password
@@ -74,10 +77,15 @@ function generatePassword() {
 
   // console.log(userChoiceAll);
 
-  for (var i = 0; i < userChoiceLength; i++) {
-    var index = Math.floor(Math.random() * userChoiceAllChars.length);
-    // console.log(userChoiceAll)
-    password += userChoiceAllChars[index];
+  // confirming at least one type of character selected
+  if (userChoiceAllChars.length > 0) {
+    for (var i = 0; i < userChoiceLength; i++) {
+      var index = Math.floor(Math.random() * userChoiceAllChars.length);
+      // console.log(userChoiceAll)
+      password += userChoiceAllChars[index];
+    }
+  } else {
+    password = "You must select at least one character type!"
   }
 
   return (password);
@@ -87,12 +95,7 @@ function generatePassword() {
 generatePasswordIDBtn.addEventListener("click", writePassword);
 
 function writePassword() {
-    var password = generatePassword();
-  
-    // getting reference to element in HTML identified with id="password"
-    var passwordTextElement = document.getElementById("password");
-    //giving that element the password value
-    //note for me ... notice importance of adding ".value"
-    passwordTextElement.value = password;
-  
+  var password = generatePassword();
+  //note for me ... notice importance of adding ".value"
+  passwordTextElement.value = password;
 }

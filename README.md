@@ -9,5 +9,7 @@ This program prompts for the following:
  - Requests confirmation for lower case letters to be included
  - Requests confirmation for special characters to be included
  - Requests confirmation for numeric characters to be included
- - It uses a random algorithm to generate a password of the specified length included the character types confirmed.
+    - It confirms that at least one type of character is selected
+    - Otherwise it returns a message letting user know that selection has been omitted.
+ - It uses a random algorithm to generate a password of the specified length including the character types confirmed.
  - It returns the generated password to the web browser
